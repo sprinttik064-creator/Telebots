@@ -12,17 +12,19 @@ Let's Go Camper, Maceravan, Nomadic) по проверенным прямым UR
 Каскад источников каждого фото: `photos/…` локально → CDN вендора → встроенная
 иллюстрация. Ничего не ломается ни офлайн, ни при смерти ссылки.
 
-## Фото четырёх Wix-вендоров (CT, RCT, CRT, KK)
-У Wix-сайтов прямые URL картинок нельзя узнать заранее — их достаёт скрипт.
-На своей машине (нужен обычный интернет):
+## Фото
+Все карточки уже с фото — файлы лежат в `photos/` в репозитории:
+- `ct.jpg` — Campervan Turkey (закат с шарами Каппадокии), `rct.jpg`,
+  `kk.jpg` — выбраны из кандидатов в `photos/src-*`;
+- `crt.webp` — hero с сайта CampervanRentalTurkey (их SPA грузит фото машин
+  из API, поэтому Wix-скрейп скрипта там пуст);
+- остальные — скачаны по прямым URL из `download_photos.sh`.
 
-```bash
-bash download_photos.sh
-```
-
-Затем выбрать по одному кадру автодома из `photos/src-ct`, `src-rct`, `src-crt`,
-`src-kk` и скопировать как `photos/ct.jpg`, `photos/rct.jpg`, `photos/crt.jpg`,
-`photos/kk.jpg` — карточки подхватят их автоматически.
+Заменить кадр: выбрать другой файл из `photos/src-ct` / `src-rct` / `src-kk`
+и скопировать поверх (`cp photos/src-ct/ct-06.jpg photos/ct.jpg`).
+Обновить всё заново: `bash download_photos.sh` (нужен доступ в интернет —
+локально или в окружении с Network access: Full/Custom; запасной путь —
+workflow `download-photos.yml` в GitHub Actions).
 
 ## Что внутри
 - Котировки 60 дней — анимированный рейтинг 9 предложений
