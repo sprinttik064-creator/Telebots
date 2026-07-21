@@ -25,10 +25,19 @@ dl lgc-hero.jpg    "https://www.letsgocamper.com/uploads/anasayfa.JPG"
 dl tab-hero.jpg    "https://www.travellers-autobarnrv.com/wp-content/uploads/2025/10/Campervan-on-Bixby-Bridge-USA.jpg"
 dl tab-miles.jpg   "https://www.travellers-autobarnrv.com/wp-content/uploads/2022/05/Unlimited-MIles-2.jpg"
 dl tab-joshua.jpg  "https://www.travellers-autobarnrv.com/wp-content/uploads/2026/06/Group-of-friends-in-front-of-campervan-in-Joshua-Tree-National-Park.jpg"
-# Maceravan — фото допоборудования со страницы Extralar
+# Maceravan — hero кемпервэн + фото допоборудования со страницы Extralar
+dl mv-hero.png     "https://maceravan.com/Uploads/0abb1062-a0ed-441e-b26e-c9bbc7124bfe.png"
 dl mv-kitchen.png  "https://maceravan.com/Uploads/146efcb9-06c7-4929-ab80-8e3d752484ce.png"
 dl mv-camp.png     "https://maceravan.com/Uploads/d82de765-7c42-483e-9fa8-3dfd1c5f4529.png"
 dl mv-scooter.png  "https://maceravan.com/Uploads/1c9660f8-7723-4ab3-aac7-64231674d7ae.png"
+# США — hero-кадры с сайтов/API вендоров (21.07.2026)
+dl ca.jpg          "https://www.cruiseamerica.com/media/k5ylvufq/frd20.jpg?width=1024"
+dl rvs.jpg         "https://rvshare.com/assets/media/images/home-2026/drive-or-tow-bg-25f397113cc49129238b95bedc982c0b.jpg"
+dl grv.jpg         "https://gorvrentals.com/wp-content/uploads/2021/12/Go-RV-Rentals-Van-scaled.jpg"
+dl brv.webp        "https://www.bestrvrentalcompanies.com/images/rv-rental-camping-guide-og.webp"
+# Outdoorsy — реальный листинг из их публичного API (api.outdoorsy.com/v0/rentals)
+dl out.jpg         "https://res.cloudinary.com/outdoorsy/image/upload/v1784596127/p/rentals/545689/images/vn0bergctwjinft2ajfq.jpg"
+# Armut — биржа заявок без фото-листингов: своего кадра RV на сайте нет, карточка показывает встроенную иллюстрацию
 # Nomadic Caravan — реальные фото машины 2020 (запас: карточка вернётся, когда дадут цену)
 dl nc-hero.webp    "https://nomadic-caravan.com/storage/campervan/campervan-1/nomadic-caravan-1-reel-520x380.webp"
 dl nc-int.webp     "https://nomadic-caravan.com/storage/campervan/campervan-1/campervan-1-8-520x380.webp"
