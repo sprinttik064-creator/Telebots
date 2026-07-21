@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Автодома · Турция vs США · платформа сравнения</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#14201f;--paper:#f2efe7;--petrol:#0f4c4a;--petrol2:#1d6b68;--rust:#a8442a;
+ --sand:#c9b98f;--sand2:#a8925c;--line:#c8c2b2;--muted:#5e6a63;--usa:#3c4b7a;--usa2:#5a6da3;
+ --card:#faf8f2;--r:30px;--ease:cubic-bezier(.22,1,.36,1);
+ --sh:0 8px 26px rgba(20,32,31,.08);--sh2:0 20px 48px rgba(20,32,31,.17)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:15.5px;line-height:1.55}
+body::before{content:"";position:fixed;top:-240px;right:-180px;width:620px;height:620px;border-radius:50%;
+ background:radial-gradient(closest-side,rgba(15,76,74,.10),transparent 72%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;bottom:-260px;left:-200px;width:640px;height:640px;border-radius:50%;
+ background:radial-gradient(closest-side,rgba(168,68,42,.07),transparent 72%);pointer-events:none;z-index:0}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 130px;position:relative;z-index:1}
+h1,h2,h3,.tab,.badge,th,.big,.sortbtn,.chip{font-family:Oswald,"Arial Narrow",sans-serif;font-weight:600}
+h1{font-size:clamp(26px,4.4vw,42px);line-height:1.05;margin:0 0 10px;text-transform:uppercase;animation:fadeUp .7s var(--ease) both}
+h2{font-size:20px;text-transform:uppercase;margin:34px 0 12px;color:var(--petrol);position:relative;padding-bottom:8px}
+h2::after{content:"";position:absolute;left:0;bottom:0;width:46px;height:4px;border-radius:var(--r);background:currentColor;opacity:.35}
+h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em;margin:26px 0 6px;color:var(--rust)}
+p{margin:.55em 0}
+a{color:var(--petrol);transition:color .25s}
+a:hover{color:var(--rust)}
+.rule{height:6px;width:0;max-width:150px;border-radius:var(--r);background:linear-gradient(90deg,var(--petrol),var(--rust));animation:rule 1.1s var(--ease) .25s forwards;margin:0 0 14px}
+@keyframes rule{to{width:150px}}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px;animation:fadeUp .7s var(--ease) .1s both}
+.chip{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--petrol);
+ border:1px solid var(--line);background:var(--card);padding:6px 13px;border-radius:var(--r);box-shadow:var(--sh)}
+.meta{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;animation:fadeUp .7s var(--ease) .18s both}
+.mono{font-family:"JetBrains Mono",monospace;font-size:12.5px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.comment{border-left:5px solid var(--rust);background:linear-gradient(180deg,rgba(168,68,42,.055),rgba(168,68,42,.028));
+ padding:14px 18px;margin:18px 0;font-size:14.5px;border-radius:var(--r)}
+.comment b{color:var(--rust)}
+.comment .lbl{font-family:Oswald,sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);display:block;margin-bottom:4px}
+
+.tabs{display:flex;gap:6px;margin:22px 0 8px;flex-wrap:wrap;position:sticky;top:10px;z-index:40;
+ padding:8px;background:rgba(242,239,231,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+ border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.tab{border:1px solid transparent;background:transparent;padding:9px 15px;font-size:12.5px;text-transform:uppercase;
+ letter-spacing:.05em;cursor:pointer;color:var(--ink);border-radius:var(--r);
+ transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease),transform .18s var(--ease)}
+.tab:hover{background:rgba(20,32,31,.07)}
+.tab:active{transform:scale(.95)}
+.tab.on{background:var(--ink);color:var(--paper);box-shadow:0 6px 16px rgba(20,32,31,.28)}
+
+.sortrow{display:flex;gap:8px;align-items:center;margin:12px 0;flex-wrap:wrap}
+.sortbtn{border:1px solid var(--line);background:var(--card);padding:6px 14px;font-size:11.5px;text-transform:uppercase;
+ cursor:pointer;color:var(--muted);border-radius:var(--r);transition:border-color .3s,color .3s,box-shadow .3s,transform .18s}
+.sortbtn:hover{border-color:var(--petrol);color:var(--petrol)}
+.sortbtn:active{transform:scale(.95)}
+.sortbtn.on{border-color:var(--petrol);color:var(--petrol);box-shadow:inset 0 0 0 1px var(--petrol)}
+
+.rank{margin:18px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+ padding:18px 20px;box-shadow:var(--sh)}
+.rrow{display:grid;grid-template-columns:230px 1fr 92px;gap:12px;align-items:center;
+ padding:7px 12px;margin:2px -12px;border-radius:var(--r);transition:background .25s var(--ease)}
+.rrow:hover{background:rgba(201,185,143,.18)}
+.rrow .n{font-family:Oswald,sans-serif;font-size:12.5px;text-transform:uppercase;line-height:1.15}
+.rbar{height:16px;border-radius:0 var(--r) var(--r) 0;background:linear-gradient(90deg,var(--sand),var(--sand2));
+ width:0;transition:width 1.1s var(--ease)}
+.rrow.lead .rbar{background:linear-gradient(90deg,var(--petrol),var(--petrol2))}
+.rank.go .rbar{width:var(--w)}
+.rrow:nth-child(1) .rbar{transition-delay:.05s}.rrow:nth-child(2) .rbar{transition-delay:.12s}
+.rrow:nth-child(3) .rbar{transition-delay:.19s}.rrow:nth-child(4) .rbar{transition-delay:.26s}
+.rrow:nth-child(5) .rbar{transition-delay:.33s}.rrow:nth-child(6) .rbar{transition-delay:.40s}
+.rrow:nth-child(7) .rbar{transition-delay:.47s}.rrow:nth-child(8) .rbar{transition-delay:.54s}
+.rrow:nth-child(9) .rbar{transition-delay:.61s}
+.rrow .v{font-family:"JetBrains Mono",monospace;font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+@media(max-width:680px){
+ .rrow{grid-template-columns:132px 1fr 78px}
+ .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .tabs::-webkit-scrollbar{display:none}
+ .tab{white-space:nowrap;flex:0 0 auto}
+}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin:16px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+ display:flex;flex-direction:column;box-shadow:var(--sh);
+ transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+ animation:cardIn .6s var(--ease) both;animation-delay:calc(var(--i,0)*70ms)}
+.card:hover{transform:translateY(-6px);box-shadow:var(--sh2)}
+.card.lead{border:2px solid var(--petrol)}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.ph{height:172px;background:linear-gradient(135deg,var(--petrol),var(--petrol2));position:relative;overflow:hidden}
+.ph.us{background:linear-gradient(135deg,var(--usa),var(--usa2))}
+.ph svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.ph::after{content:"";position:absolute;inset:0;z-index:2;
+ background:linear-gradient(105deg,transparent 42%,rgba(242,239,231,.15) 50%,transparent 58%);
+ transform:translateX(-110%);animation:sheen 3.8s var(--ease) 1.1s 2}
+@keyframes sheen{to{transform:translateX(110%)}}
+.phimg{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:3;
+ opacity:0;transform:scale(1.05);transition:opacity .7s var(--ease),transform 1s var(--ease)}
+.phimg.ok{opacity:1;transform:scale(1)}
+.card:hover .phimg.ok{transform:scale(1.06)}
+.ph .init{position:absolute;right:10px;bottom:10px;color:rgba(242,239,231,.95);font-family:Oswald,sans-serif;
+ font-size:13px;letter-spacing:.12em;z-index:4;background:rgba(20,32,31,.78);padding:3px 11px;border-radius:var(--r);
+ backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.chead{padding:13px 16px 6px;cursor:pointer}
+.chead:hover .cname{color:var(--petrol)}
+.us-c .chead:hover .cname{color:var(--usa)}
+.cname{font-family:Oswald,sans-serif;font-size:15.5px;text-transform:uppercase;transition:color .25s}
+.big{font-size:22px;color:var(--petrol);margin:2px 0}
+.us-c .big{color:var(--usa)}
+.sub{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted)}
+.ch{display:inline-block;transition:transform .4s var(--ease)}
+.card.open .ch{transform:rotate(180deg)}
+.badges{display:flex;gap:5px;flex-wrap:wrap;padding:0 16px 10px}
+.badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--petrol);
+ color:var(--petrol);padding:3px 9px;border-radius:var(--r)}
+.badge.hot{background:var(--rust);border-color:var(--rust);color:#fff}
+.det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.card.open .det{grid-template-rows:1fr}
+.din{overflow:hidden;min-height:0}
+.dpad{border-top:1px dashed var(--line);padding:10px 16px;font-size:13.5px}
+.det table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0}
+.det td{padding:3.5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.det td:last-child{font-family:"JetBrains Mono",monospace;font-size:12px;text-align:right}
+.det tr:last-child td{border-bottom:0}
+.gal{display:flex;gap:8px;margin:9px 0}
+.gal img{flex:1 1 0;min-width:0;height:76px;object-fit:cover;border:1px solid var(--line);border-radius:var(--r)}
+.gimg{opacity:0;transition:opacity .6s var(--ease),transform .5s var(--ease)}
+.gimg.ok{opacity:1}
+.gal .gimg.ok:hover{transform:scale(1.05)}
+.cfoot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+.cfoot a{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--petrol)}
+.us-c .cfoot a{color:var(--usa)}
+.cmp{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);cursor:pointer;user-select:none;
+ padding:4px 10px;border-radius:var(--r);transition:background .25s,color .25s}
+.cmp:hover{background:rgba(201,185,143,.2);color:var(--ink)}
+.cmp input{accent-color:var(--rust);margin-right:4px}
+
+.twrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+ box-shadow:var(--sh);margin:14px 0}
+table.flat{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+table.flat th{background:var(--petrol);color:var(--paper);text-align:left;padding:9px 13px;font-size:11.5px;text-transform:uppercase}
+table.flat.us th{background:var(--usa)}
+table.flat td,table.flat th.rowh{padding:8px 13px;border-bottom:1px solid var(--line);vertical-align:top;transition:background .25s}
+table.flat th.rowh{background:none;color:inherit;font-family:inherit;font-size:13.5px;font-weight:400;text-transform:none;text-align:left}
+table.flat tbody tr:last-child :is(td,th.rowh){border-bottom:0}
+table.flat tbody tr:nth-child(odd) :is(td,th.rowh){background:rgba(201,185,143,.13)}
+table.flat tbody tr:hover :is(td,th.rowh){background:rgba(201,185,143,.26)}
+table.flat a{color:var(--petrol)} table.flat.us a{color:var(--usa)}
+.best :is(td,th.rowh){background:rgba(15,76,74,.10)!important;font-weight:600}
+
+#cbar{position:fixed;left:16px;right:16px;bottom:16px;margin:0 auto;max-width:1048px;
+ background:rgba(20,32,31,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--paper);
+ padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:60;
+ border-radius:var(--r);box-shadow:var(--sh2);
+ transform:translateY(150%);opacity:0;visibility:hidden;pointer-events:none;
+ transition:transform .5s var(--ease),opacity .4s var(--ease),visibility 0s linear .5s}
+#cbar.show{transform:none;opacity:1;visibility:visible;pointer-events:auto;
+ transition:transform .5s var(--ease),opacity .4s var(--ease),visibility 0s}
+#cbar-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#cbar button{font-family:Oswald,sans-serif;background:var(--rust);color:#fff;border:0;padding:10px 22px;
+ font-size:13px;text-transform:uppercase;cursor:pointer;border-radius:var(--r);
+ transition:filter .25s,transform .18s var(--ease),opacity .25s}
+#cbar button:hover{filter:brightness(1.12)}
+#cbar button:active{transform:scale(.95)}
+#cbar button[disabled]{opacity:.45;cursor:not-allowed;filter:none}
+#cmodal{position:fixed;inset:0;background:rgba(20,32,31,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+ display:none;z-index:70;padding:24px;overflow:auto}
+#cmodal.show{display:block;animation:fadeIn .3s var(--ease) both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+#cmodal .inner{background:var(--paper);max-width:1000px;margin:40px auto;padding:26px;border:1px solid var(--line);
+ border-radius:var(--r);box-shadow:var(--sh2);animation:pop .45s var(--ease) both}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+#cmodal .ctwrap{overflow-x:auto}
+#cmodal table{width:100%;border-collapse:collapse;font-size:13px}
+#cmodal th{background:var(--ink);color:var(--paper);padding:8px 10px;text-align:left;font-size:11.5px;text-transform:uppercase;font-family:Oswald,sans-serif}
+#cmodal td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+#cmodal th.rlab{background:none;color:var(--muted);font-family:Oswald,sans-serif;font-size:12px;font-weight:600;
+ text-transform:uppercase;white-space:nowrap;text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+#cmodal .x{float:right;cursor:pointer;font-family:Oswald,sans-serif;padding:6px 14px;border-radius:var(--r);
+ transition:background .25s}
+#cmodal .x:hover{background:rgba(168,68,42,.12);color:var(--rust)}
+
+section{display:none}
+section.on{display:block;animation:secIn .5s var(--ease) both}
+@keyframes secIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.an p{max-width:860px}
+.an .kpi{font-family:"JetBrains Mono",monospace;font-size:12.5px;background:var(--card);border:1px solid var(--line);
+ padding:12px 16px;margin:10px 0;max-width:860px;border-radius:var(--r);box-shadow:var(--sh)}
+.srcnote{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--muted);letter-spacing:.04em;display:block;margin-top:4px}
+
+:where(button,a,[tabindex]):focus-visible{outline:3px solid var(--petrol);outline-offset:2px;
+ box-shadow:0 0 0 2px var(--paper);border-radius:var(--r)}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;
+  transition-duration:.001ms!important;transition-delay:0ms!important}
+ html{scroll-behavior:auto}
+}
+@media print{
+ .tabs,#cbar,#cmodal,.cmp,.sortrow{display:none!important}
+ section{display:block!important;animation:none!important}
+ .det{grid-template-rows:1fr!important}
+ .rank .rbar{width:var(--w)!important}
+ body::before,body::after{display:none}
+ .card{box-shadow:none;break-inside:avoid}
+ .wrap{padding-bottom:20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+<h1>Автодома · Турция vs США</h1>
+<div class="rule"></div>
+<div class="chips">
+<span class="chip">21.07.2026</span>
+<span class="chip">01.08–01.10.2026 · 60 дней</span>
+<span class="chip">2 человека · старт Стамбул</span>
+<span class="chip">USD · 1 USD = 47,15 ₺ · 1 EUR = 1,143 USD</span>
+<span class="chip">только варианты с ценой</span>
+</div>
+<p class="meta">платформа сравнения · фото: локальная папка photos/ (создать: bash download_photos.sh), иначе — напрямую с сайтов вендоров, офлайн — встроенная иллюстрация</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Разделы платформы">
+<button class="tab on" role="tab" aria-selected="true" aria-controls="s-rank" data-s="s-rank">Котировки 60 дн</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="s-tr" data-s="s-tr">Турция · 7</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="s-us" data-s="s-us">США · 7</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="s-dr" data-s="s-dr">Водители</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="s-an" data-s="s-an">Анализ рынков</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="s-tot" data-s="s-tot">Итог</button>
+</div>
+
+<!-- RANK -->
+<section id="s-rank" class="on" role="tabpanel">
+<h2>Котировки за 60 дней, $</h2>
+<div class="rank">
+<div class="rrow lead"><div class="n">Campervan Turkey</div><div class="rbar" style="--w:33%"></div><div class="v" data-n="4572">4 572</div></div>
+<div class="rrow"><div class="n">Maceravan · авг+сент по календарю</div><div class="rbar" style="--w:48%"></div><div class="v" data-n="6643">6 643</div></div>
+<div class="rrow"><div class="n">Rental Caravan · устные €100</div><div class="rbar" style="--w:49%"></div><div class="v" data-n="6858">6 858</div></div>
+<div class="rrow"><div class="n">Let's Go Camper · МКПП</div><div class="rbar" style="--w:56%"></div><div class="v" data-n="7887">7 887</div></div>
+<div class="rrow"><div class="n">Rental Caravan · письменно €120 (2012–2015 г.)</div><div class="rbar" style="--w:59%"></div><div class="v" data-n="8230">8 230</div></div>
+<div class="rrow"><div class="n">KolayKaravan · объявление</div><div class="rbar" style="--w:63%"></div><div class="v" data-n="8798">8 798</div></div>
+<div class="rrow"><div class="n">CampervanRentalTurkey · 3 pax</div><div class="rbar" style="--w:70%"></div><div class="v" data-n="9709">9 709</div></div>
+<div class="rrow"><div class="n">LGC АКПП · RCT автомат 2020</div><div class="rbar" style="--w:74%"></div><div class="v" data-n="10287">10 287</div></div>
+<div class="rrow"><div class="n">CampervanRentalTurkey · 4 pax</div><div class="rbar" style="--w:100%"></div><div class="v" data-n="13961">13 961</div></div>
+</div>
+
+<div class="comment"><span class="lbl">Комментарий</span>
+<b>Campervan Turkey — $4 572 ($76/день) — лидер, и теперь понятно почему.</b> С их сайта: во флоте 35+ машин, среди них Boxer 2015, Transit 2015, Sprinter 2014 и Iveco 2017 — котировка почти наверняка на машину этих лет. Это не делает цену плохой, но требует до оплаты: какая именно машина, год, пробег, фото, что включено. И отдельный бонус: у них в меню есть услуга «Private Driver» — единственный прокатчик с водителем на рынке, запросить цену вместе с котировкой.</div>
+
+<div class="comment"><span class="lbl">Комментарий</span>
+<b>Прайс Rental Caravan вскрыт по машинам:</b> €120 письменно — это Jumper 2012, Boxer 2015, Ducato 2015. Автомат Iveco 2020 у них же стоит €150 ($171/д = $10 287/60). То есть их «скидка» упирается в возраст машины. <b>У Maceravan снят сезонный календарь:</b> август 6 500 ₺, сентябрь 6 000 ₺ — честный пересчёт 60 дней даёт $6 643, чуть лучше плоской оценки. <b>CampervanRentalTurkey</b> так и не дал цену на 2 pax — перезапросить. <b>KolayKaravan $8 798</b> — объявление частника, торг на 60 дней −15–25 % уместен.</div>
+</section>
+
+<!-- TURKEY -->
+<section id="s-tr" role="tabpanel">
+<h2>Турция — 7 вариантов с ценой</h2>
+<div class="sortrow"><span class="mono" style="color:var(--muted)">сортировка:</span>
+<button class="sortbtn on" data-g="tr" data-k="total">по цене 60 дн</button>
+<button class="sortbtn" data-g="tr" data-k="name">по имени</button>
+</div>
+<div class="grid" id="g-tr"></div>
+
+<div class="comment"><span class="lbl">Комментарий · безлимит пробега</span>
+Стандарт турецкого рынка — лимит 200–300 км/день (пул 12 000–18 000 км за 60 дней; письменно уточнять, пул это или посуточное сгорание). Сверхлимит у Maceravan — $0,11/км. Безлимит существует в двух местах: Nomadic Caravan (Анталия) продаёт его за <b>+$171 разово на весь срок</b> — цена аренды у них только в календаре брони, поэтому в карточки не попали, но их безлимит — рычаг торга с остальными; и Motoroads — агрегатор со Стамбулом, где безлимит зашит в пакет, цена по датам в движке.
+<div class="gal" style="max-width:440px">
+<img class="gimg" loading="lazy" referrerpolicy="no-referrer" alt="Nomadic Caravan — кемпервэн 2020 г." src="photos/nc-hero.webp" data-q="https://nomadic-caravan.com/storage/campervan/campervan-1/nomadic-caravan-1-reel-520x380.webp" onload="this.classList.add('ok')" onerror="imNext(this)">
+<img class="gimg" loading="lazy" referrerpolicy="no-referrer" alt="Nomadic Caravan — интерьер" src="photos/nc-int.webp" data-q="https://nomadic-caravan.com/storage/campervan/campervan-1/campervan-1-8-520x380.webp" onload="this.classList.add('ok')" onerror="imNext(this)">
+</div>
+<span class="srcnote">Nomadic Caravan · машина 2020 г. · фото с их сайта</span></div>
+
+<div class="comment"><span class="lbl">Комментарий · доп. оборудование</span>
+Прайс допов Maceravan (с их сайта, разово на весь срок): спальный набор $21/$42, кухня $42, кемпинг с мангалом $42, палатка+2 спальника $85, детское кресло $42; понедельно: интернет $32, велосипед $53, мотоприцеп $85, каноэ $148; скутер 50сс $64/день. Обвязка на двоих на 2 месяца — $105–170 разово. В США у премиума (Blacksford) всё это включено в ставку, у корпоративных сетей — платно и дороже: уборка $300, страховка $42/ночь.</div>
+</section>
+
+<!-- USA -->
+<section id="s-us" role="tabpanel">
+<h2 style="color:var(--usa)">США — 7 вариантов с ценой</h2>
+<div class="sortrow"><span class="mono" style="color:var(--muted)">сортировка:</span>
+<button class="sortbtn on" data-g="us" data-k="total">по цене 60 дн</button>
+<button class="sortbtn" data-g="us" data-k="name">по имени</button>
+</div>
+<div class="grid" id="g-us"></div>
+
+<div class="comment"><span class="lbl">Комментарий</span>
+Пересечение с Турцией одно — Travellers Autobarn: $5 340/60 дн с безлимитом, но это компактный кемпервэн (экс-хабы закрывшегося Escape Campervans). Полноценный Class C по реальному чеку — $12 500/60 дн. Премиум Blacksford ($16 150) продаёт в ставке то, за что остальные берут отдельно: безлимит миль и генератора, страховку, бельё, кухню и даже годовой пропуск в нацпарки; флот — новые Winnebago/Thor/Nexus 2024–25 с литиевыми батареями. Витрину в США не сравнивать — только итоговый чек (+44 %).</div>
+</section>
+
+<!-- DRIVERS -->
+<section id="s-dr" role="tabpanel">
+<h2>Водители — Турция</h2>
+<div class="twrap"><table class="flat">
+<thead><tr><th scope="col">#</th><th scope="col">канал</th><th scope="col">цена, $</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><a href="https://armut.com/fiyatlari/istanbul-ozel-sofor_247_34" target="_blank" rel="noopener">armut.com · özel şoför</a></td><td class="mono">по заявке · 1 311 водителей в Стамбуле</td></tr>
+<tr class="best"><td>2</td><td><a href="https://www.eleman.net/meslek/sofor/maas" target="_blank" rel="noopener">eleman.net · наём в штат / мес</a></td><td class="mono">719 – 1 686 · средн. 990 · Стамбул 1 046</td></tr>
+<tr><td>3</td><td><a href="https://www.campervanturkey.com" target="_blank" rel="noopener">Campervan Turkey · Private Driver</a></td><td class="mono">по запросу · единственный прокатчик с водителем</td></tr>
+<tr><td>4</td><td><a href="https://yolcu360.com/soforlu-arac-kiralama" target="_blank" rel="noopener">yolcu360.com</a> · <a href="https://enbabaorganizasyon.com/ozel-sofor-hizmeti" target="_blank" rel="noopener">enbaba</a></td><td class="mono">VIP-шофёр, тарифы 4/8/24 ч · по запросу</td></tr>
+<tr><td>5</td><td><a href="https://demtur.com.tr/tr/soforlu-vip-arac-kiralama-fiyatlari" target="_blank" rel="noopener">demtur.com.tr · межгород</a></td><td class="mono">0,21 – 0,42/км · Стамбул→Анталия 150 – 300</td></tr>
+</tbody></table></div>
+
+<h2 style="color:var(--usa)">Водители — США</h2>
+<div class="twrap"><table class="flat us">
+<thead><tr><th scope="col">#</th><th scope="col">канал</th><th scope="col">цена, $</th></tr></thead>
+<tbody>
+<tr class="best"><td>1</td><td><a href="https://familytravelfever.com/hire-someone-drive-your-rv/" target="_blank" rel="noopener">рыночная ставка</a></td><td class="mono">150 – 350/день + расходы · агентство +10–25 %</td></tr>
+<tr><td>2</td><td><a href="https://www.rvdrivers.net" target="_blank" rel="noopener">rvdrivers.net</a></td><td class="mono">фикс-квота по маршруту · с 1994</td></tr>
+<tr><td>3</td><td><a href="https://www.personaldrivers.com/services/" target="_blank" rel="noopener">personaldrivers.com</a></td><td class="mono">50 – 100/час · 500 – 1 000/день</td></tr>
+<tr><td>4</td><td><a href="https://rentedtruckdriver.com/hire-a-rv-driver-for-your-motorhome/" target="_blank" rel="noopener">rentedtruckdriver.com</a></td><td class="mono">единая финальная квота</td></tr>
+<tr><td>5</td><td><a href="https://www.rvdelivery.com/drivemyrvmotorhome.html" target="_blank" rel="noopener">rvdelivery.com · driveaway</a></td><td class="mono">500 – 1 000/рейс</td></tr>
+</tbody></table></div>
+
+<div class="comment"><span class="lbl">Комментарий</span>
+Турецкий водитель на месяц ($990–1 690 наймом) стоит как американский на неделю ($150–350/день). Находка этой итерации: у Campervan Turkey — того самого лидера по цене — в меню сайта есть «Private Driver for Solo Traveler»; это первый найденный прокатчик, который сам закрывает вопрос водителя, и цену на него стоит запросить в одном сообщении с котировкой. До найма решить спальное место: в машине на двоих его нет — отель $45–70/ночь или 4-местная машина. Водителя вписывать в договор (25+, стаж 5 лет), иначе страховка не работает.</div>
+</section>
+
+<!-- ANALYSIS -->
+<section id="s-an" class="an" role="tabpanel">
+<h2>Анализ рынков</h2>
+
+<h3>Рынок RV · Турция</h3>
+<p>Рынок состоит из десятков малых операторов с флотами 5–35 машин, сосредоточенных в пяти хабах: Стамбул, Анталия, Измир, Даламан, Фетхие. Публичного прайса, как правило, нет — цена добывается перепиской в WhatsApp, и торг встроен в процесс: в нашем кейсе продавец сбросил 17 % за одно сообщение, а затем «забыл» скидку в письменной котировке. Из-за высоких пошлин на ввоз готовых кемперов машины собираются локально: свежий жилой модуль ставится на подержанное европейское шасси. Вскрытый прайс Rental Caravan показывает это в цифрах: €120/день — это Jumper 2012 и Boxer/Ducato 2015, автомат 2020 года — уже €150. Поэтому главный вопрос к любому офферу — не интерьер, а год и пробег шасси.</p>
+<div class="kpi">сезонность (календарь Maceravan): зима 3 400 ₺/д ($72) → август 6 500 ₺/д ($138) — размах ×1,9 · лимит 200–300 км/день — стандарт · безлимит: +$171 разово (Nomadic) или пакет Motoroads · двухкомнатных машин нет · электро/гибридов в прокате нет</div>
+<p>Сильная сторона рынка — экономика: лучшие котировки $76–113/день против $208 реального чека за Class C в США, плюс легальные дикие стоянки, снижающие расходы на ночёвки почти до нуля. Слабая — предсказуемость: нет онлайн-брони, подтверждений приходится ждать сутками, устные цены испаряются. На горизонте 6 месяцев зимний календарь ($72/день) делает межсезонный контракт заметно дешевле летнего.</p>
+
+<h3>Рынок RV · США</h3>
+<p>Полностью оцифрованный рынок: цена видна до контакта, бронь онлайн, флот у сетей исчисляется тысячами машин 2024–25 годов. Обратная сторона — структура чека: витринная ставка занижена, реальный чек выше на 44 % (уборка $300, страховка $42/ночь, сервисный сбор $250). P2P-платформы (RVshare, Outdoorsy) дешевле сетей на 20–40 % и дают владельческие скидки до 40 % за длинный срок. Рынок консолидируется: бюджетный лидер Escape Campervans закрылся в 2026-м, его хабы подобрал Travellers Autobarn. Премиум-сегмент конкурирует не ценой, а составом ставки: Blacksford включает безлимит миль и генератора, страховку, бельё, кухню и годовой пропуск в нацпарки — то, что у корпоративных сетей набегает сверху.</p>
+<div class="kpi">средняя по стране $198/ночь (+8,1 % г/г) · медиана Class C: витрина $185 → чек $260 · сезонный размах Class C: $750 (февраль) → $1 300 (пик) за неделю · мили: от безлимита до $0,35/миля с первой</div>
+
+<h3>Прямое сравнение</h3>
+<p>За 60 дней сопоставимый фургон стоит $4 600–8 200 в Турции против $12 500 реального чека Class C в США — разрыв двукратный. США выигрывают качеством флота (машины 2024–25 против шасси 2012–2020), инфраструктурой RV-парков и предсказуемостью сделки; Турция — деньгами, свободой ночёвок и глубиной торга. Точка пересечения одна: бюджетный кемпервэн TAB за $5 340/60 дней с безлимитом — но это класс ниже полноценного автодома. Правило переноса опыта: американский принцип «сравнивать только итоговый чек» обязателен и в Турции — поэтому от каждого вендора нужна одна финальная цифра письмом.</p>
+
+<h3>Рынок водителей</h3>
+<p>В обеих странах прокат и водитель — разные рынки. В Турции причина регуляторная: коммерческая перевозка пассажиров требует лицензий (SRC/D2), которых у прокатчиков кемперов нет, поэтому все пять опрошенных ответили «без водителя». Исключения ровно два: частники на Armut со своим караваном под съёмки и мероприятия — и обнаруженная на этой итерации услуга «Private Driver» у Campervan Turkey. Основной канал найма — зарплатный рынок ($719–1 686/мес, в среднем $990) с оформлением SGK, быстрый канал — биржа Armut с отзывами, точечный — перегоны по $0,21–0,42/км.</p>
+<p>В США рынок водителей профессионализирован и дорог: $150–350/день плюс дорога, отель и питание водителя, агентская наценка 10–25 %, чаевые ~10 % де-факто обязательны; отдельная ниша — driveaway-перегон без пассажиров за $500–1 000/рейс. Итог одной строкой: месяц турецкого водителя стоит как неделя американского. Экономическая ловушка одинакова в обеих странах — спальное место: в машине на двоих водителю негде ночевать, и отель на 60 дней ($2 700–4 200) способен удвоить бюджет найма, поэтому вопрос водителя решается до выбора машины, а не после.</p>
+
+<h3>Что делать</h3>
+<p>1) Письмом зафиксировать у Campervan Turkey машину, год, комплектацию и финальные $4 572 — заодно цену их Private Driver. 2) Вернуть Rental Caravan к устным €100 и взять их прайс-вилку как рычаг: автомат 2020 за €150 — запасной вариант. 3) Дожать CampervanRentalTurkey на цену 2-местной машины. 4) Безлимит Nomadic (+$171) использовать как аргумент в торге за километраж. 5) Только после выбора машины — решать водителя.</p>
+</section>
+
+<!-- TOTALS -->
+<section id="s-tot" role="tabpanel">
+<h2>Итог, $</h2>
+<div class="twrap"><table class="flat">
+<thead><tr><th scope="col"><span class="mono" style="text-transform:none">статья</span></th><th scope="col">Турция</th><th scope="col">США</th></tr></thead>
+<tbody>
+<tr><th scope="row" class="rowh">аренда 60 дн</th><td class="mono">4 572 – 13 961 · лидер 4 572</td><td class="mono">5 340 кемпервэн · ≈12 500 Class C чек · ≈16 150 премиум</td></tr>
+<tr class="best"><th scope="row" class="rowh">всё-в-одном 60 дн</th><td class="mono"><b>6 300 – 7 200</b> при лидере · 10 000 – 11 500 по медиане</td><td class="mono"><b>17 500 – 24 000</b></td></tr>
+<tr><th scope="row" class="rowh">аренда 30 дн</th><td class="mono">3 478 Maceravan (авг, всё вкл.) · зимой от ≈2 300</td><td class="mono">2 670 кемпервэн · 6 250 Class C · 8 100 премиум</td></tr>
+<tr><th scope="row" class="rowh">водитель 30 дн</th><td class="mono">990 – 1 690 наём · Private Driver CT — по запросу</td><td class="mono">4 500 – 10 500</td></tr>
+<tr><th scope="row" class="rowh">безлимит км</th><td class="mono">+171 разово (Nomadic) · пакет (Motoroads)</td><td class="mono">включён: TAB / Blacksford · 0,35/миля: Cruise</td></tr>
+<tr><th scope="row" class="rowh">допы</th><td class="mono">105 – 170 разово · интернет 32/нед</td><td class="mono">в премиуме включены · у сетей: уборка 300 + страховка 42/ночь</td></tr>
+</tbody></table></div>
+</section>
+
+</div>
+
+<div id="cbar"><span class="mono" id="cbar-t" aria-live="polite"></span><button id="cbtn" onclick="openCmp()" disabled>Сравнить</button></div>
+<div id="cmodal"><div class="inner" role="dialog" aria-modal="true" aria-label="Сравнение выбранных вендоров" tabindex="-1"><span class="x" role="button" tabindex="0" onclick="closeCmp()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();closeCmp()}">✕ закрыть</span><h2 style="margin-top:0">Сравнение</h2><div class="ctwrap" id="ctbl"></div></div></div>
+
+<script>
+var V=[
+{id:'ct',c:'tr',name:'Campervan Turkey',url:'https://www.campervanturkey.com',day:'$76/день',total:4572,tl:'$4 572 / 60 дн',badges:['котировка €4 000','лидер цены','есть Private Driver'],lead:1,img:['photos/ct.jpg'],init:'CT',
+ rows:[['60 дней, котировка','$4 572 (€4 000)'],['за день','$76'],['флот','35+ машин, 12 лет на рынке, 13 локаций'],['машины во флоте','Ducato 2022/2025 · Iveco 2017/2023 · Boxer 2015 · Transit 2015 · Sprinter 2014 · Mercedes 4p Стамбул'],['вероятная машина котировки','2014–2017 г. — запросить подтверждение'],['услуги','Private Driver · трансферы · производство кемперов'],['контакт','+90 544 627 07 37']],
+ note:'Цена объяснима возрастом флота. Зафиксировать письмом: машина, год, пробег, комплектация, финальная сумма.'},
+{id:'mv',c:'tr',name:'Maceravan',url:'https://maceravan.com',day:'авг $138 · сент $127',total:6643,tl:'$6 643 / 60 дн',badges:['смета на руках','сезонный календарь снят'],lead:0,img:null,init:'M',
+ gal:[['photos/mv-kitchen.png','https://maceravan.com/Uploads/146efcb9-06c7-4929-ab80-8e3d752484ce.png'],
+      ['photos/mv-camp.png','https://maceravan.com/Uploads/d82de765-7c42-483e-9fa8-3dfd1c5f4529.png'],
+      ['photos/mv-scooter.png','https://maceravan.com/Uploads/1c9660f8-7723-4ab3-aac7-64231674d7ae.png']],
+ rows:[['30 дней (август), всё вкл.','$3 478'],['60 дней: 31д×6 500 + 30д×6 000 −20 % + наборы','$6 643'],['календарь ₺/день','зима 3 400 · май 4 500 · июн–авг 6 500 · сен–окт 6 000'],['скидки','−20 % от 30 дн · есть недельная'],['лимит','200 км/день · сверх $0,11/км'],['депозит / наборы','$318 / $170 разово'],['мин. срок','лето 7 дн · зима 2 дн'],['допы разово','кухня $42 · кемпинг $42 · палатка $85 · кресло $42'],['допы понедельно','интернет $32 · вело $53 · прицеп $85 · каноэ $148 · скутер $64/день'],['машина','4 места · 2 двуспальные · МКПП · 15 м³ · до 3,5 т (права B)']],
+ note:'На фото — допы с их сайта. Город выдачи в смете не указан — уточнить.'},
+{id:'rct',c:'tr',name:'Rental Caravan Turkey',url:'https://www.rentalcaravanturkey.com/en',day:'$137–183 по прайсу',total:8230,tl:'$8 230 / 60 дн (€120)',badges:['прайс вскрыт по годам','устно было $114/д'],lead:0,img:['photos/rct.jpg'],init:'RC',
+ rows:[['€120 = $137/д','Jumper 2012 · Boxer 2015 · Ducato 2015'],['€145 = $166/д','Ducato 2018'],['€150 = $171/д','Iveco 2020 АКПП · Alkoven · Iveco 2023'],['€160 = $183/д','Ford 4x4 2023 · Fiat 2023'],['60 дн по €120 / по €150 (АКПП)','$8 230 / $10 287'],['60 дн по устным €100','$6 858 — вернуть письмом'],['условия','мин. 5 дн · 300 км/д · депозит $686 нал · предоплата 20 % невозвратная'],['выдача','Стамбул (Силиври + аэропорт) · Анталия']],
+ note:'Письменные €120 — это машины 2012–2015 годов. За автомат 2020 они же просят €150.'},
+{id:'lgc',c:'tr',name:"Let's Go Camper",url:'https://www.letsgocamper.com',day:'МКПП $131 · АКПП $171',total:7887,tl:'$7 887 – 10 287 / 60 дн',badges:['котировка','сайт: $149–200/д'],lead:0,
+ img:['photos/lgc-hero.jpg','https://www.letsgocamper.com/uploads/anasayfa.JPG'],init:'LG',
+ rows:[['60 дн, механика (€115/д)','$7 887'],['60 дн, автомат (€150/д)','$10 287'],['цены сайта, июль','Ducato 4p $149 · Iveco 6p $154 · Iveco 5p АКПП $183 · Iveco 6p АКПП $200'],['скидка','−5 % при полной оплате за 30 дн · депозит при отмене не возвращается'],['комплектация','солнечная панель · WC/душ · кондиционер · TV — все модели'],['база','Анталия (Аксу) · +90 532 792 44 76']],
+ note:'Котировка ниже сайта на ~12 % — длинная скидка уже внутри. База Анталия: из Стамбула — перегон. Фото — с их сайта.'},
+{id:'crt',c:'tr',vt:'alk',name:'CampervanRentalTurkey',url:'https://campervanrentalturkey.com',day:'$162–233/день',total:9709,tl:'$9 709 (3 pax) / 60 дн',badges:['цены на 2 pax нет'],lead:0,img:['photos/crt.jpg'],init:'CR',
+ rows:[['60 дн, 3-местный','$9 709 (€8 494)'],['60 дн, 4-местный','$13 961 (€12 214)'],['60 дн, 2-местный','не дали — перезапросить'],['Стамбул','Iveco АКПП только с 15.08'],['предоплата','20 %']],
+ note:'Раскрылись только дорогими машинами — требовать цену на 2-местную.'},
+{id:'kk',c:'tr',name:'KolayKaravan',url:'https://www.kolaykaravan.com/karavan-kirala/istanbul',day:'$147/день',total:8798,tl:'$8 798 / 60 дн',badges:['P2P · частник','торг −15–25 %'],lead:0,img:['photos/kk.jpg'],init:'KK',
+ rows:[['объявление, 60 дн','$8 798 (414 800 ₺)'],['за день','$147'],['платформа','частные владельцы · ~30 городов · фильтры АКПП/год'],['торг','владельцы ценят длинный контракт — просить скидку']],
+ note:'Цена одного объявления: рядом есть и дешевле — фильтровать Стамбул + АКПП.'},
+{id:'ar',c:'tr',name:'Armut · karavan',url:'https://armut.com/istanbul-motokaravan-kiralama',day:'$53–520 · пример $64',total:null,tl:'вилка $53–520/д',badges:['40 фирм','отзывы'],lead:0,img:null,init:'A',
+ rows:[['вилка заявок','$53 – 520/день'],['живой пример','$64/день при 7+ днях'],['механика','заявка → до 5 офферов с ценами'],['встречается','600 Вт солнца · бак 400 л · стиральная машина']],
+ note:'Цены приходят сами после заявки — нужен телефон.'},
+
+{id:'tab',c:'us',vt:'van',name:'Travellers Autobarn',url:'https://www.travellers-autobarnrv.com',day:'от $89/ночь',total:5340,tl:'$5 340 / 60 дн',badges:['безлимит миль','дешевле всех в США'],lead:1,
+ img:['photos/tab-hero.jpg','https://www.travellers-autobarnrv.com/wp-content/uploads/2025/10/Campervan-on-Bixby-Bridge-USA.jpg'],init:'TA',
+ gal:[['photos/tab-miles.jpg','https://www.travellers-autobarnrv.com/wp-content/uploads/2022/05/Unlimited-MIles-2.jpg'],
+      ['photos/tab-joshua.jpg','https://www.travellers-autobarnrv.com/wp-content/uploads/2026/06/Group-of-friends-in-front-of-campervan-in-Joshua-Tree-National-Park.jpg']],
+ rows:[['60 дней','$5 340 + страховка'],['за ночь','от $89'],['мили','безлимит включён, 365 дней в году'],['точки','LA · Las Vegas · SF · Denver · Seattle · one-way'],['бельё + кухня','$45 разово'],['отмена','бесплатно за 15+ дней до выдачи'],['на рынке','с 1993 · экс-хабы Escape · KOA −10 %']],note:'Фото — с их сайта.'},
+{id:'ca',c:'us',vt:'alk',name:'Cruise America',url:'https://www.cruiseamerica.com',day:'от $100 + мили',total:7500,tl:'от $6 000 + мили',badges:['~120 точек'],lead:0,img:null,init:'CA',
+ rows:[['за ночь','от ≈$100'],['мили','$0,35/миля почти с первой'],['4 300 миль маршрута','≈ +$1 500'],['сеть','крупнейшая корпоративная']],note:''},
+{id:'rvs',c:'us',vt:'alk',name:'RVshare',url:'https://rvshare.com',day:'C $100–400/ночь',total:7000,tl:'C: $7 000–13 000 / 60 дн',badges:['P2P №1','−20–40 % к сетям'],lead:0,img:null,init:'RV',
+ rows:[['Class B','$100 – 350/ночь'],['Class C','$100 – 400/ночь'],['Class A','$150 – 450/ночь'],['прицепы','$50 – 200/ночь'],['длинный срок','скидка владельца 10 – 40 %']],note:''},
+{id:'out',c:'us',name:'Outdoorsy',url:'https://www.outdoorsy.com',day:'C $150–200/ночь',total:8000,tl:'C: $8 000–11 000 / 60 дн',badges:['P2P №2'],lead:0,img:null,init:'O',
+ rows:[['Class B','$100 – 200/ночь'],['Class C','$150 – 200/ночь'],['Class A','$175 – 275/ночь']],note:''},
+{id:'grv',c:'us',vt:'alk',name:'Go RV Rentals · индекс',url:'https://gorvrentals.com',day:'рынок $198/ночь',total:11880,tl:'≈$11 880 / 60 дн по рынку',badges:['индекс цен, март 2026'],lead:0,img:null,init:'GO',
+ rows:[['средняя по США','$198/ночь · +8,1 % за год'],['60 дней по средней','≈$11 880'],['промокоды','≈$92 с недели']],note:''},
+{id:'brv',c:'us',vt:'alk',name:'Бенчмарк Class C',url:'https://www.bestrvrentalcompanies.com/blog/2026-q1-rv-rental-pricing-report',day:'витрина 185 → чек 260',total:12500,tl:'$12 500 / 60 дн all-in',badges:['реальный чек +44 %'],lead:0,img:null,init:'BM',
+ rows:[['Class C витрина','$185/ночь (медиана Q1 2026)'],['Class C реальный чек','≈$260/ночь'],['состав +44 %','уборка $300 · страховка $42/ночь · сбор $250']],note:''},
+{id:'bf',c:'us',vt:'alk',name:'Blacksford',url:'https://www.blacksford.com',day:'$249–450/ночь',total:16150,tl:'≈$16 150 / 60 дн',badges:['премиум all-in','безлимит миль'],lead:0,
+ img:['photos/bf-hero.jpg','https://images.squarespace-cdn.com/content/v1/65ec940eedd8c12c02601fe8/4313518b-3768-4525-a28a-7153cb15241c/00-winnebago-rv-for-rent.jpg?format=1500w'],init:'B',
+ gal:[['photos/bf-solis.jpg','https://images.squarespace-cdn.com/content/v1/65ec940eedd8c12c02601fe8/1715006976747-NMYJJJ8E7TQE8GTGK340/winnebago-solis-rv-rentals-01.jpg?format=750w'],
+      ['photos/bf-29t.jpg','https://images.squarespace-cdn.com/content/v1/65ec940eedd8c12c02601fe8/1748883061895-J3ON7726T9HRT1Z80TQ2/nexus-triumph-29T-00-motorhome-for-rent.jpg?format=750w'],
+      ['photos/bf-sunflyer.jpg','https://images.squarespace-cdn.com/content/v1/65ec940eedd8c12c02601fe8/1772752571571-76XOFTI4T0G2VJM592MS/winnebago-sunflyer-24gg-exterior-01.jpg?format=750w']],
+ rows:[['за ночь','$249 – 450 · от $299 (Las Vegas)'],['60 дней с −10 %','≈$16 150'],['в ставке','безлимит миль + генератор · страховка · бельё · кухня · годовой пропуск в нацпарки'],['флот','7 моделей Winnebago/Thor/Nexus 2024–25 · литиевые батареи · спальных мест 4–8'],['точки','Bozeman · Las Vegas · Phoenix · Seattle · встреча в аэропорту'],['скидка','−10 % автоматом при 10+ днях']],
+ note:'Фото — флот с их сайта.'}
+];
+
+function vsvg(t,us){var a=us?'#5a6da3':'#1d6b68',b=us?'#2e3c66':'#0d3d3b',w='#f2efe7',s='';
+ if(t=='alk'){s='<rect x="24" y="46" width="210" height="64" rx="6" fill="'+a+'"/><path d="M234 62h38l18 24v24h-56z" fill="'+a+'"/><rect x="24" y="34" width="126" height="22" rx="6" fill="'+a+'"/><rect x="246" y="72" width="26" height="16" rx="3" fill="'+w+'" opacity=".85"/><rect x="40" y="58" width="26" height="16" rx="3" fill="'+w+'" opacity=".85"/><rect x="76" y="58" width="26" height="16" rx="3" fill="'+w+'" opacity=".85"/><rect x="112" y="58" width="26" height="16" rx="3" fill="'+w+'" opacity=".85"/><circle cx="80" cy="116" r="15" fill="#14201f"/><circle cx="80" cy="116" r="6" fill="'+w+'"/><circle cx="236" cy="116" r="15" fill="#14201f"/><circle cx="236" cy="116" r="6" fill="'+w+'"/><rect x="10" y="128" width="300" height="3" fill="'+w+'" opacity=".25"/>';}
+ else{s='<path d="M30 108V60q0-10 10-10h180q14 0 22 10l26 30q4 5 4 10v8z" fill="'+a+'"/><rect x="60" y="38" width="120" height="8" rx="4" fill="'+a+'"/><rect x="46" y="60" width="30" height="18" rx="3" fill="'+w+'" opacity=".85"/><rect x="86" y="60" width="30" height="18" rx="3" fill="'+w+'" opacity=".85"/><rect x="126" y="60" width="30" height="18" rx="3" fill="'+w+'" opacity=".85"/><path d="M222 60h16l20 24h-36z" fill="'+w+'" opacity=".85"/><circle cx="84" cy="112" r="15" fill="#14201f"/><circle cx="84" cy="112" r="6" fill="'+w+'"/><circle cx="232" cy="112" r="15" fill="#14201f"/><circle cx="232" cy="112" r="6" fill="'+w+'"/><rect x="10" y="126" width="300" height="3" fill="'+w+'" opacity=".25"/>';}
+ return '<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="320" height="160" fill="'+b+'"/>'+s+'</svg>';}
+
+function imNext(g){var q=(g.getAttribute('data-q')||'').split('|').filter(Boolean);
+ if(q.length){g.setAttribute('data-q',q.slice(1).join('|'));g.src=q[0];}
+ else{var p=g.parentNode;g.remove();
+  if(p&&p.classList&&p.classList.contains('gal')&&!p.querySelector('img')){p.style.display='none';
+   var s=p.nextElementSibling;if(s&&s.classList&&s.classList.contains('srcnote'))s.style.display='none';}}}
+function chainImg(srcs,alt,cls){
+ return '<img class="'+cls+'" loading="lazy" referrerpolicy="no-referrer" alt="'+alt+'" src="'+srcs[0]
+ +'" data-q="'+srcs.slice(1).join('|')+'" onload="this.classList.add(\'ok\')" onerror="imNext(this)">';}
+
+var sel=[];
+function card(v,i){
+ var ph=v.img?chainImg(v.img,v.name,'phimg'):'';
+ var b=v.badges.map(function(x,j){return '<span class="badge'+(v.lead&&j==1?' hot':'')+'">'+x+'</span>'}).join('');
+ var rows=v.rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('');
+ var gal=v.gal?'<div class="gal">'+v.gal.map(function(g){return chainImg(g,v.name,'gimg')}).join('')+'</div>':'';
+ var note=v.note?'<p style="margin:6px 0 2px;font-size:13px;color:var(--muted)"><i>'+v.note+'</i></p>':'';
+ return '<div class="card'+(v.lead?' lead':'')+(v.c=='us'?' us-c':'')+'" id="c-'+v.id+'" style="--i:'+i+'">'
+ +'<div class="ph'+(v.c=='us'?' us':'')+'">'+vsvg(v.vt,v.c=='us')+'<span class="init">'+v.init+'</span>'+ph+'</div>'
+ +'<div class="chead" role="button" tabindex="0" aria-expanded="false" onclick="tg(\''+v.id+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tg(\''+v.id+'\')}"><div class="cname">'+v.name+'</div><div class="big">'+v.tl+'</div><div class="sub">'+v.day+' · детали <span class="ch">▾</span></div></div>'
+ +'<div class="badges">'+b+'</div>'
+ +'<div class="det"><div class="din"><div class="dpad">'+gal+'<table>'+rows+'</table>'+note+'</div></div></div>'
+ +'<div class="cfoot"><a href="'+v.url+'" target="_blank" rel="noopener">'+v.url.replace(/^https?:\/\/(www\.)?/,'').split('/')[0]+' →</a>'
+ +'<label class="cmp"><input type="checkbox" onchange="ck(\''+v.id+'\',this.checked)">сравнить</label></div></div>';
+}
+function render(g,key){
+ var box=document.getElementById('g-'+g);
+ var opened=Array.prototype.map.call(box.querySelectorAll('.card.open'),function(c){return c.id});
+ var arr=V.filter(function(v){return v.c==g});
+ if(key=='name')arr.sort(function(a,b){return a.name.localeCompare(b.name,'ru')});
+ else arr.sort(function(a,b){return (a.total==null?1e9:a.total)-(b.total==null?1e9:b.total)});
+ box.innerHTML=arr.map(function(v,i){return card(v,i)}).join('');
+ sel.forEach(function(id){var el=document.querySelector('#c-'+id+' .cmp input');if(el)el.checked=true});
+ opened.forEach(function(cid){var c=document.getElementById(cid);
+  if(c){c.classList.add('open');var h=c.querySelector('.chead');if(h)h.setAttribute('aria-expanded','true')}});
+}
+function tg(id){var c=document.getElementById('c-'+id);c.classList.toggle('open');
+ var h=c.querySelector('.chead');if(h)h.setAttribute('aria-expanded',c.classList.contains('open'))}
+function ck(id,on){sel=sel.filter(function(x){return x!=id});if(on)sel.push(id);
+ var bar=document.getElementById('cbar'),btn=document.getElementById('cbtn'),t=document.getElementById('cbar-t');
+ if(sel.length>0){bar.classList.add('show');
+  t.textContent='выбрано: '+sel.map(function(i){return V.find(function(v){return v.id==i}).name}).join(' · ')
+   +(sel.length<2?' — отметьте ещё один вариант':'');
+  btn.disabled=sel.length<2;}
+ else{bar.classList.remove('show');btn.disabled=true;}}
+var lastFocus=null;
+function openCmp(){
+ if(sel.length<2)return;
+ var vs=sel.map(function(i){return V.find(function(v){return v.id==i})});
+ var h='<table><thead><tr><th></th>'+vs.map(function(v){return '<th scope="col">'+v.name+'</th>'}).join('')+'</tr></thead><tbody>';
+ [['Цена',function(v){return v.tl}],['За день',function(v){return v.day}],['Бейджи',function(v){return v.badges.join(' · ')}],['Ссылка',function(v){return '<a href="'+v.url+'" target="_blank" rel="noopener">открыть →</a>'}]].forEach(function(f){
+  h+='<tr><th scope="row" class="rlab">'+f[0]+'</th>'+vs.map(function(v){return '<td>'+f[1](v)+'</td>'}).join('')+'</tr>';});
+ var mx=Math.max.apply(null,vs.map(function(v){return v.rows.length}));
+ for(var r=0;r<mx;r++){h+='<tr><th scope="row" class="rlab">'+(r==0?'Детали':'')+'</th>'+vs.map(function(v){return '<td class="mono" style="font-size:12px">'+(v.rows[r]?v.rows[r][0]+': '+v.rows[r][1]:'')+'</td>'}).join('')+'</tr>';}
+ h+='</tbody></table>';
+ document.getElementById('ctbl').innerHTML=h;
+ lastFocus=document.activeElement;
+ document.getElementById('cmodal').classList.add('show');
+ document.body.style.overflow='hidden';
+ document.querySelector('#cmodal .inner').focus();
+}
+function closeCmp(){var m=document.getElementById('cmodal');
+ if(!m.classList.contains('show'))return;
+ m.classList.remove('show');
+ document.body.style.overflow='';
+ if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+document.getElementById('cmodal').addEventListener('click',function(e){if(e.target.id==='cmodal')closeCmp()});
+document.addEventListener('keydown',function(e){
+ var m=document.getElementById('cmodal');
+ if(e.key==='Escape'){closeCmp();return}
+ if(e.key==='Tab'&&m.classList.contains('show')){
+  var f=m.querySelectorAll('a[href],button,[tabindex="0"],.inner');
+  if(!f.length)return;
+  var first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+
+var RED=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fmtN(n){return Math.round(n).toLocaleString('ru-RU')}
+function animRank(){var r=document.querySelector('.rank');if(!r||r.classList.contains('go'))return;
+ requestAnimationFrame(function(){requestAnimationFrame(function(){r.classList.add('go')})});
+ var vs=r.querySelectorAll('.v[data-n]');
+ Array.prototype.forEach.call(vs,function(el,i){var to=+el.getAttribute('data-n');
+  if(RED){el.textContent=fmtN(to);return}
+  setTimeout(function(){var t0=null,dur=1100;
+   function step(ts){if(t0===null)t0=ts;var p=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-p,3);
+    el.textContent=fmtN(to*e);if(p<1)requestAnimationFrame(step)}
+   el.textContent='0';requestAnimationFrame(step)},50+i*70)});
+}
+document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){
+ document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false')});
+ document.querySelectorAll('section').forEach(function(x){x.classList.remove('on')});
+ t.classList.add('on');t.setAttribute('aria-selected','true');
+ document.getElementById(t.dataset.s).classList.add('on');
+ window.scrollTo({top:0,behavior:RED?'auto':'smooth'});
+ if(t.dataset.s==='s-rank')animRank();}});
+document.querySelectorAll('.sortbtn').forEach(function(b){b.onclick=function(){
+ document.querySelectorAll('.sortbtn[data-g="'+b.dataset.g+'"]').forEach(function(x){x.classList.remove('on')});
+ b.classList.add('on');render(b.dataset.g,b.dataset.k);}});
+render('tr','total');render('us','total');animRank();
+</script>
+</body>
+</html>
