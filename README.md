@@ -28,18 +28,20 @@ workflow `download-photos.yml` в GitHub Actions).
 
 ## Хостинг (Vercel / Netlify) — в 2 клика
 
-Репозиторий уже готов к статик-деплою: `netlify.toml` и `vercel.json` настроены
-так, что корневой URL сразу отдаёт платформу (rewrite на
-`avtodom-platforma-local.html`, без видимого редиректа), фото едут из `photos/`.
-Сборка не нужна.
-
-**Netlify:** [Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/sprinttik064-creator/Telebots)
-→ авторизоваться в своём Netlify → Deploy. Через ~20 сек будет ссылка вида
-`https://<имя>.netlify.app`.
+Репозиторий готов к статик-деплою без сборки: в корне лежит `index.html`
+(это и есть платформа, копия `avtodom-platforma-local.html`), поэтому
+корневой URL `/` открывает её сразу; фото едут из `photos/`.
 
 **Vercel:** [Deploy with Vercel](https://vercel.com/new/clone?repository-url=https://github.com/sprinttik064-creator/Telebots)
-→ Import → Deploy (Framework Preset: Other, всё по умолчанию). Ссылка вида
-`https://<имя>.vercel.app`.
+→ Import → **Framework Preset: Other**, Build Command и Output Directory
+оставить пустыми → Deploy. Ссылка вида `https://<имя>.vercel.app`.
+
+**Netlify:** [Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/sprinttik064-creator/Telebots)
+→ авторизоваться → Deploy (build пустой, publish = корень). Ссылка вида
+`https://<имя>.netlify.app`.
+
+> Правишь платформу — синхронь обе копии: `cp avtodom-platforma-local.html index.html`
+> (или редактируй `index.html`). На хостинге отдаётся именно `index.html`.
 
 Оба варианта привязывают репозиторий: каждый `git push` в ветку
 пере-деплоит сайт автоматически. Логин в Vercel/Netlify делается один раз в
