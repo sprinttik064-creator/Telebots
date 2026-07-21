@@ -1,0 +1,9 @@
+# Статический сайт: сервим платформу как есть, без сборки.
+# Корневой URL "/" отдаёт avtodom-platforma-local.html (rewrite, без редиректа в адресе).
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/avtodom-platforma-local.html"
+  status = 200

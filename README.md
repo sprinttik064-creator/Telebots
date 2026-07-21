@@ -26,6 +26,25 @@ Let's Go Camper, Maceravan, Nomadic) по проверенным прямым UR
 локально или в окружении с Network access: Full/Custom; запасной путь —
 workflow `download-photos.yml` в GitHub Actions).
 
+## Хостинг (Vercel / Netlify) — в 2 клика
+
+Репозиторий уже готов к статик-деплою: `netlify.toml` и `vercel.json` настроены
+так, что корневой URL сразу отдаёт платформу (rewrite на
+`avtodom-platforma-local.html`, без видимого редиректа), фото едут из `photos/`.
+Сборка не нужна.
+
+**Netlify:** [Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/sprinttik064-creator/Telebots)
+→ авторизоваться в своём Netlify → Deploy. Через ~20 сек будет ссылка вида
+`https://<имя>.netlify.app`.
+
+**Vercel:** [Deploy with Vercel](https://vercel.com/new/clone?repository-url=https://github.com/sprinttik064-creator/Telebots)
+→ Import → Deploy (Framework Preset: Other, всё по умолчанию). Ссылка вида
+`https://<имя>.vercel.app`.
+
+Оба варианта привязывают репозиторий: каждый `git push` в ветку
+пере-деплоит сайт автоматически. Логин в Vercel/Netlify делается один раз в
+браузере — токен в коде не нужен.
+
 ## Что внутри
 - Котировки 60 дней — анимированный рейтинг 9 предложений
 - Турция · 7 и США · 7 — карточки вендоров: фото, детали, сортировка, чекбоксы «сравнить» и модальное сравнение бок-о-бок
