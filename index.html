@@ -160,6 +160,12 @@ table.flat tbody tr:nth-child(odd) :is(td,th.rowh){background:rgba(201,185,143,.
 table.flat tbody tr:hover :is(td,th.rowh){background:rgba(201,185,143,.26)}
 table.flat a{color:var(--petrol)} table.flat.us a{color:var(--usa)}
 .best :is(td,th.rowh){background:rgba(15,76,74,.10)!important;font-weight:600}
+table.flat tr.totrow :is(td,th.rowh){background:rgba(15,76,74,.13);border-top:2px solid var(--petrol);padding-top:11px;padding-bottom:11px}
+table.flat tr.totrow th.rowh{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.03em;color:var(--petrol)}
+table.flat tr.totrow b{font-size:17px;color:var(--petrol);font-family:Oswald,sans-serif}
+table.flat tr.totrow2 :is(td,th.rowh){background:rgba(168,68,42,.12);border-top-color:var(--rust)}
+table.flat tr.totrow2 th.rowh{color:var(--rust)}
+table.flat tr.totrow2 b{color:var(--rust)}
 
 #cbar{position:fixed;left:16px;right:16px;bottom:16px;margin:0 auto;max-width:1048px;
  background:rgba(20,32,31,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--paper);
@@ -252,12 +258,12 @@ section.on{display:block;animation:secIn .5s var(--ease) both}
 <button class="perbtn on" data-d="60" aria-pressed="true" onclick="setPeriod(60)">60 дней</button>
 <button class="perbtn" data-d="180" aria-pressed="false" onclick="setPeriod(180)">6 месяцев</button>
 </div>
-<span class="lbl" style="text-transform:none;font-size:11px">суммы карточек и рейтинга пересчитываются · 6 мес — линейная оценка ×3 от 60-дневной ставки (длинный контракт обычно дешевле на 10–20 %)</span>
+<span class="lbl" style="text-transform:none;font-size:11px">пересчитываются карточки, котировки, водители и итог · 6 мес — линейная оценка ×3 от 60-дневной ставки (длинный контракт обычно дешевле на 10–20 %)</span>
 </div>
 
 <!-- RANK -->
 <section id="s-rank" class="on" role="tabpanel">
-<h2>Котировки за <span id="rankper">60 дней</span>, $</h2>
+<h2>Котировки за <span id="rankper" class="perlabel">60 дней</span>, $</h2>
 <div class="rank">
 <div class="rrow lead"><div class="n">Campervan Turkey</div><div class="rbar" style="--w:33%"></div><div class="v" data-n="4572">4 572</div></div>
 <div class="rrow"><div class="n">Maceravan · авг+сент по календарю</div><div class="rbar" style="--w:48%"></div><div class="v" data-n="6643">6 643</div></div>
@@ -271,10 +277,10 @@ section.on{display:block;animation:secIn .5s var(--ease) both}
 </div>
 
 <div class="comment"><span class="lbl">Комментарий</span>
-<b>Campervan Turkey — $4 572 ($76/день) — лидер, и теперь понятно почему.</b> С их сайта: во флоте 35+ машин, среди них Boxer 2015, Transit 2015, Sprinter 2014 и Iveco 2017 — котировка почти наверняка на машину этих лет. Это не делает цену плохой, но требует до оплаты: какая именно машина, год, пробег, фото, что включено. И отдельный бонус: у них в меню есть услуга «Private Driver» — единственный прокатчик с водителем на рынке, запросить цену вместе с котировкой.</div>
+<b>Campervan Turkey — <span data-v="4572" data-per="60"></span> ($76/день) — лидер, и теперь понятно почему.</b> С их сайта: во флоте 35+ машин, среди них Boxer 2015, Transit 2015, Sprinter 2014 и Iveco 2017 — котировка почти наверняка на машину этих лет. Это не делает цену плохой, но требует до оплаты: какая именно машина, год, пробег, фото, что включено. И отдельный бонус: у них в меню есть услуга «Private Driver» — единственный прокатчик с водителем на рынке, запросить цену вместе с котировкой.</div>
 
 <div class="comment"><span class="lbl">Комментарий</span>
-<b>Прайс Rental Caravan вскрыт по машинам:</b> $137/д письменно — это Jumper 2012, Boxer 2015, Ducato 2015. Автомат Iveco 2020 у них же стоит $171/д (= $10 287 за 60 дн). То есть их «скидка» упирается в возраст машины. <b>У Maceravan снят сезонный календарь:</b> август $138/д, сентябрь $127/д — честный пересчёт даёт $6 643 за 60 дн, чуть лучше плоской оценки. <b>CampervanRentalTurkey</b> так и не дал цену на 2 pax — перезапросить. <b>KolayKaravan $8 798</b> — объявление частника, торг на 60 дней −15–25 % уместен.</div>
+<b>Прайс Rental Caravan вскрыт по машинам:</b> $137/д письменно — это Jumper 2012, Boxer 2015, Ducato 2015. Автомат Iveco 2020 у них же стоит $171/д (= <span data-v="10287" data-per="60"></span> за срок). То есть их «скидка» упирается в возраст машины. <b>У Maceravan снят сезонный календарь:</b> август $138/д, сентябрь $127/д — честный пересчёт даёт <span data-v="6643" data-per="60"></span> за срок, чуть лучше плоской оценки. <b>CampervanRentalTurkey</b> так и не дал цену на 2 pax — перезапросить. <b>KolayKaravan <span data-v="8798" data-per="60"></span></b> — объявление частника, торг на длинном сроке −15–25 % уместен.</div>
 </section>
 
 <!-- TURKEY -->
@@ -313,30 +319,26 @@ section.on{display:block;animation:secIn .5s var(--ease) both}
 
 <!-- DRIVERS -->
 <section id="s-dr" role="tabpanel">
-<h2>Водители — Турция</h2>
+<h2>Водители — Турция · стоимость найма под поездку</h2>
 <div class="twrap"><table class="flat">
-<thead><tr><th scope="col">#</th><th scope="col">канал</th><th scope="col">цена, $</th></tr></thead>
+<thead><tr><th scope="col">канал найма</th><th scope="col">ставка</th><th scope="col">за <span class="perlabel">60 дней</span></th></tr></thead>
 <tbody>
-<tr class="best"><td>1</td><td><a href="https://www.eleman.net/meslek/sofor/maas" target="_blank" rel="noopener">eleman.net · наём в штат / мес</a></td><td class="mono">штат 2026: $719–1 686 · средн. $990 · Стамбул $1 045 · özel şoför средн. $867</td></tr>
-<tr><td>2</td><td><a href="https://armut.com/fiyatlari/istanbul-ozel-sofor_247_34" target="_blank" rel="noopener">armut.com · özel şoför</a></td><td class="mono">заявки İST июль'26: разовая поездка $32–106 · неделя-фултайм до $583 · месяц со своим авто до $1 909 · вилка $32–1 485</td></tr>
-<tr><td>3</td><td><a href="https://demtur.com.tr/tr/soforlu-vip-arac-kiralama-fiyatlari" target="_blank" rel="noopener">demtur.com.tr · VIP-шофёр</a></td><td class="mono">час $21–64 · день $106–318 · межгород $0,21–0,42/км · İST→Анталия ≈$147–294</td></tr>
-<tr><td>4</td><td><a href="https://yolcu360.com/soforlu-arac-kiralama" target="_blank" rel="noopener">yolcu360.com · трансфер</a></td><td class="mono">аэропорт İST→Таксим от $46 · İST→Анкара от $483 · İZM→Бодрум от $255</td></tr>
-<tr><td>5</td><td><a href="https://www.campervanturkey.com" target="_blank" rel="noopener">Campervan Turkey · Private Driver</a></td><td class="mono">услуга в меню сайта; ставку не публикует (аренда тоже «quick quote») · ориентир — özel şoför $867/мес или шофёр $106–318/день</td></tr>
+<tr class="best"><td><a href="https://www.eleman.net/meslek/sofor/maas" target="_blank" rel="noopener">Наём в штат · özel şoför</a> <span class="mono" style="color:var(--muted)">(eleman.net, 2026)</span></td><td class="mono">$867 / мес</td><td class="mono"><b><span data-v="867" data-per="30"></span></b></td></tr>
+<tr><td><a href="https://www.eleman.net/meslek/sofor/maas" target="_blank" rel="noopener">Наём в штат · водитель</a> <span class="mono" style="color:var(--muted)">(eleman.net, 2026)</span></td><td class="mono">$990 / мес</td><td class="mono"><b><span data-v="990" data-per="30"></span></b></td></tr>
+<tr><td><a href="https://armut.com/istanbul-motokaravan-kiralama" target="_blank" rel="noopener">Armut · длительный наём</a> (со своим авто)</td><td class="mono">до $1 909 / мес</td><td class="mono"><b><span data-v="1909" data-per="30"></span></b></td></tr>
+<tr><td><a href="https://www.campervanturkey.com" target="_blank" rel="noopener">Campervan Turkey · Private Driver</a> (услуга проката)</td><td class="mono">цена по запросу</td><td class="mono">—</td></tr>
 </tbody></table></div>
 
-<h2 style="color:var(--usa)">Водители — США</h2>
+<h2 style="color:var(--usa)">Водители — США · стоимость найма под поездку</h2>
 <div class="twrap"><table class="flat us">
-<thead><tr><th scope="col">#</th><th scope="col">канал</th><th scope="col">цена, $</th></tr></thead>
+<thead><tr><th scope="col">канал найма</th><th scope="col">ставка</th><th scope="col">за <span class="perlabel">60 дней</span></th></tr></thead>
 <tbody>
-<tr class="best"><td>1</td><td><a href="https://familytravelfever.com/hire-someone-drive-your-rv/" target="_blank" rel="noopener">рыночная ставка</a></td><td class="mono">150 – 350/день + расходы · агентство +10–25 %</td></tr>
-<tr><td>2</td><td><a href="https://www.rvdrivers.net" target="_blank" rel="noopener">rvdrivers.net</a></td><td class="mono">фикс-квота по маршруту · с 1994</td></tr>
-<tr><td>3</td><td><a href="https://www.personaldrivers.com/services/" target="_blank" rel="noopener">personaldrivers.com</a></td><td class="mono">50 – 100/час · 500 – 1 000/день</td></tr>
-<tr><td>4</td><td><a href="https://rentedtruckdriver.com/hire-a-rv-driver-for-your-motorhome/" target="_blank" rel="noopener">rentedtruckdriver.com</a></td><td class="mono">квота = финал (водитель + мотель + питание), без скрытых сборов · 1000+ отзывов BBB · тел. 833-783-6683</td></tr>
-<tr><td>5</td><td><a href="https://www.rvdelivery.com/drivemyrvmotorhome.html" target="_blank" rel="noopener">rvdelivery.com · driveaway</a></td><td class="mono">перегон 500 – 1 000/рейс · в квоте: водитель + топливо + платные дороги + страховка до $250 000</td></tr>
+<tr class="best"><td><a href="https://familytravelfever.com/hire-someone-drive-your-rv/" target="_blank" rel="noopener">Профессиональный RV-водитель</a> (едет с вами)</td><td class="mono">$150 – 350 / день + отель и питание</td><td class="mono"><b><span data-v="150" data-per="day"></span> – <span data-v="350" data-per="day"></span></b> + расходы</td></tr>
+<tr><td><a href="https://www.personaldrivers.com/services/" target="_blank" rel="noopener">personaldrivers.com</a> (почасово / посуточно)</td><td class="mono">$50 – 100 / час · $500 – 1 000 / день</td><td class="mono">по договорённости</td></tr>
 </tbody></table></div>
 
-<div class="comment"><span class="lbl">Комментарий · всё сверено с сайтами 21.07.2026</span>
-Цифры больше не «по запросу». <b>Наём в штат (eleman.net):</b> водитель средн. $990, özel şoför средн. $867, Стамбул $1 045. <b>Разово (Armut, İST):</b> поездка $32–106, месяц фултайм со своим авто до $1 909. <b>VIP-шофёр (demtur):</b> день $106–318, час $21–64, межгород $0,21–0,42/км. <b>Трансфер (yolcu360):</b> İST-аэропорт→Таксим от $46, İST→Анкара от $483. Турецкий водитель на месяц стоит как американский на неделю ($150–350/день). У Campervan Turkey «Private Driver for Solo Traveler» есть в меню, но своей ставки они не публикуют (аренда тоже «quick quote») — ориентир берём из рынка выше. До найма решить спальное место: в машине на двоих его нет — отель $45–70/ночь или 4-местная машина. Водителя вписывать в договор (25+, стаж 5 лет), иначе страховка не работает.</div>
+<div class="comment"><span class="lbl">Комментарий · только наём под поездку, без такси и трансферов</span>
+<b>Турция.</b> Реальный водитель под поездку — это наём в штат: <b>$867/мес</b> (özel şoför) или <b>$990/мес</b> (водитель), данные eleman.net за 2026, оформление через SGK; длительно со своим авто через Armut — до <b>$1 909/мес</b>. <b>США.</b> Профессиональный RV-водитель, который едет с вами, — <b>$150–350/день</b> плюс его отель и питание; агентская наценка 10–25 %, чаевые ~10 % де-факто обязательны. Итог одной строкой: <b>месяц турецкого водителя ≈ неделя американского</b>. До найма решить спальное место: в машине на двоих водителю негде спать — заложить отель ($45–70/ночь) или брать 4-местную машину. Водителя вписывать в договор (25+, стаж 5 лет), иначе страховка не работает.</div>
 </section>
 
 <!-- ANALYSIS -->
@@ -356,8 +358,8 @@ section.on{display:block;animation:secIn .5s var(--ease) both}
 <p>За 60 дней сопоставимый фургон стоит $4 600–8 200 в Турции против $12 500 реального чека Class C в США — разрыв двукратный. США выигрывают качеством флота (машины 2024–25 против шасси 2012–2020), инфраструктурой RV-парков и предсказуемостью сделки; Турция — деньгами, свободой ночёвок и глубиной торга. Точка пересечения одна: бюджетный кемпервэн TAB за $5 340/60 дней с безлимитом — но это класс ниже полноценного автодома. Правило переноса опыта: американский принцип «сравнивать только итоговый чек» обязателен и в Турции — поэтому от каждого вендора нужна одна финальная цифра письмом.</p>
 
 <h3>Рынок водителей</h3>
-<p>В обеих странах прокат и водитель — разные рынки. В Турции причина регуляторная: коммерческая перевозка пассажиров требует лицензий (SRC/D2), которых у прокатчиков кемперов нет, поэтому все пять опрошенных ответили «без водителя». Исключения ровно два: частники на Armut со своим караваном под съёмки и мероприятия — и обнаруженная на этой итерации услуга «Private Driver» у Campervan Turkey. Основной канал найма — зарплатный рынок ($719–1 686/мес, в среднем $990; özel şoför $867) с оформлением SGK, быстрый канал — биржа Armut с отзывами (разовая поездка $32–106, месяц со своим авто до $1 909), VIP-шофёр с авто — $106–318/день (demtur), точечный — перегоны по $0,21–0,42/км. Все эти цифры сняты с сайтов каналов 21.07.2026, а не «по запросу».</p>
-<p>В США рынок водителей профессионализирован и дорог: $150–350/день плюс дорога, отель и питание водителя, агентская наценка 10–25 %, чаевые ~10 % де-факто обязательны; отдельная ниша — driveaway-перегон без пассажиров за $500–1 000/рейс. Итог одной строкой: месяц турецкого водителя стоит как неделя американского. Экономическая ловушка одинакова в обеих странах — спальное место: в машине на двоих водителю негде ночевать, и отель на 60 дней ($2 700–4 200) способен удвоить бюджет найма, поэтому вопрос водителя решается до выбора машины, а не после.</p>
+<p>В обеих странах прокат и водитель — разные рынки. В Турции причина регуляторная: коммерческая перевозка пассажиров требует лицензий (SRC/D2), которых у прокатчиков кемперов нет, поэтому все пять опрошенных ответили «без водителя». Исключения ровно два: частники на Armut со своим караваном под съёмки и мероприятия — и обнаруженная на этой итерации услуга «Private Driver» у Campervan Turkey. Реальный водитель под длинную поездку — это наём: зарплатный рынок дал $867/мес (özel şoför) и $990/мес (водитель) с оформлением SGK (eleman.net, 2026); длительно со своим авто через Armut — до $1 909/мес. Такси, VIP-трансферы и перегоны в расчёт не берём — это другая услуга, не «водитель на весь маршрут».</p>
+<p>В США водитель, который едет с вами всю поездку, стоит $150–350/день плюс его отель и питание, агентская наценка 10–25 %, чаевые ~10 % де-факто обязательны. Итог одной строкой: месяц турецкого водителя стоит как неделя американского. Экономическая ловушка одинакова в обеих странах — спальное место: в машине на двоих водителю негде ночевать, и отель за срок способен удвоить бюджет найма, поэтому вопрос водителя решается до выбора машины, а не после.</p>
 
 <h3>Что делать</h3>
 <p>1) Письмом зафиксировать у Campervan Turkey машину, год, комплектацию и финальные $4 572 — заодно цену их Private Driver. 2) Вернуть Rental Caravan к устным $114/д и взять их прайс-вилку как рычаг: автомат 2020 за $171/д — запасной вариант. 3) Дожать CampervanRentalTurkey на цену 2-местной машины. 4) Безлимит Nomadic (+$171) использовать как аргумент в торге за километраж. 5) Только после выбора машины — решать водителя.</p>
@@ -365,17 +367,17 @@ section.on{display:block;animation:secIn .5s var(--ease) both}
 
 <!-- TOTALS -->
 <section id="s-tot" role="tabpanel">
-<h2>Итог, $</h2>
+<h2>Итог, $ — за <span class="perlabel">60 дней</span></h2>
 <div class="twrap"><table class="flat">
-<thead><tr><th scope="col"><span class="mono" style="text-transform:none">статья</span></th><th scope="col">Турция</th><th scope="col">США</th></tr></thead>
+<thead><tr><th scope="col">статья</th><th scope="col">Турция (лидер)</th><th scope="col">США (Class C, реальный чек)</th></tr></thead>
 <tbody>
-<tr><th scope="row" class="rowh">аренда 60 дн</th><td class="mono"><b>$4 572</b> – <b>$13 961</b> · лидер <b>$4 572</b></td><td class="mono"><b>$5 340</b> кемпервэн · ≈<b>$12 500</b> Class C чек · ≈<b>$16 150</b> премиум</td></tr>
-<tr class="best"><th scope="row" class="rowh">всё-в-одном 60 дн</th><td class="mono"><b>$6 300 – $7 200</b> при лидере · <b>$10 000 – $11 500</b> по медиане</td><td class="mono"><b>$17 500 – $24 000</b></td></tr>
-<tr><th scope="row" class="rowh">аренда 30 дн</th><td class="mono"><b>$3 478</b> Maceravan (авг, всё вкл.) · зимой от ≈<b>$2 300</b></td><td class="mono"><b>$2 670</b> кемпервэн · <b>$6 250</b> Class C · <b>$8 100</b> премиум</td></tr>
-<tr><th scope="row" class="rowh">водитель 30 дн</th><td class="mono"><b>$990 – $1 690</b> наём (özel şoför <b>$867</b>) · VIP-шофёр <b>$106–318</b>/день (demtur) · Private Driver CT — quick-quote</td><td class="mono"><b>$4 500 – $10 500</b> · driveaway <b>$500–1 000</b>/рейс</td></tr>
-<tr><th scope="row" class="rowh">безлимит км</th><td class="mono">+<b>$171</b> разово (Nomadic) · пакет (Motoroads)</td><td class="mono">включён: TAB / Blacksford · <b>$0,35</b>/миля: Cruise</td></tr>
-<tr><th scope="row" class="rowh">допы</th><td class="mono"><b>$105 – $170</b> разово · интернет <b>$32</b>/нед</td><td class="mono">в премиуме включены · у сетей: уборка <b>$300</b> + страховка <b>$42</b>/ночь</td></tr>
+<tr><th scope="row" class="rowh">аренда за срок</th><td class="mono"><b><span data-v="4572" data-per="60"></span></b> · $76/день (только машина)</td><td class="mono"><b><span data-v="12500" data-per="60"></span></b> · $208/день (всё вкл.)</td></tr>
+<tr><th scope="row" class="rowh">допы / сборы</th><td class="mono">+ <b>$150</b> разово (спальник, кухня, обвязка)</td><td class="mono">уже в чеке (уборка, страховка, сбор)</td></tr>
+<tr class="totrow"><th scope="row" class="rowh">ТОТАЛ · сам за рулём</th><td class="mono"><b id="tot-tr-self"></b></td><td class="mono"><b id="tot-us-self"></b></td></tr>
+<tr><th scope="row" class="rowh">+ водитель за срок (опция)</th><td class="mono">штат <b><span data-v="867" data-per="30"></span></b> · $867/мес</td><td class="mono">проф. <b><span data-v="250" data-per="day"></span></b> · $250/день + отель/питание</td></tr>
+<tr class="totrow totrow2"><th scope="row" class="rowh">ТОТАЛ · с водителем</th><td class="mono"><b id="tot-tr-drv"></b></td><td class="mono"><b id="tot-us-drv"></b></td></tr>
 </tbody></table></div>
+<p class="mono" style="color:var(--muted);max-width:880px;margin:12px 0 0;line-height:1.6">Суммы пересчитываются кнопками срока сверху. <b>Турция</b> — ставка лидера $76/день (только машина) + допы разово. <b>США</b> — реальный чек Class C $208/день, где уборка, страховка и сборы уже внутри (витрину $185/ночь не берём). <b>Водитель</b> — опция: месяц турецкого ≈ неделя американского; в машине на двоих ему негде спать — заложить отель.</p>
 </section>
 
 </div>
@@ -451,6 +453,19 @@ function chainImg(srcs,alt,cls){
 
 var PERIOD=60,SORT={tr:'total',us:'total'},PLBL={30:'30 дней',60:'60 дней',180:'6 месяцев'};
 function money(n){return '$'+Math.round(n).toLocaleString('ru-RU')}
+// период-реактивные числа: data-per="60" (базис 60 дн) | "30" (в месяц) | "day" (в день)
+function paintMoney(){Array.prototype.forEach.call(document.querySelectorAll('[data-v][data-per]'),function(el){
+ var v=+el.getAttribute('data-v'),per=el.getAttribute('data-per');
+ var f=per==='60'?PERIOD/60:per==='30'?PERIOD/30:PERIOD;
+ el.textContent=money(v*f);});}
+function setT(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
+function updateTotal(){var P=PERIOD;
+ var trRent=4572*P/60, trDrv=867*P/30, trExtra=150;     // Турция: аренда лидера + штатный водитель + допы
+ var usRent=12500*P/60, usDrv=250*P;                    // США: чек Class C (всё вкл.) + проф. водитель
+ setT('tot-tr-self',money(trRent+trExtra));
+ setT('tot-us-self',money(usRent));
+ setT('tot-tr-drv',money(trRent+trExtra+trDrv));
+ setT('tot-us-drv',money(usRent+usDrv));}
 function priceStr(v){if(v.total==null)return v.tl||'';
  var f=PERIOD/60,s=(v.q?v.q+' ':'')+money(v.total*f);
  if(v.hi)s+=' – '+money(v.hi*f);
@@ -528,7 +543,8 @@ function paintRank(){var f=PERIOD/60;Array.prototype.forEach.call(document.query
 function setPeriod(d){PERIOD=d;
  Array.prototype.forEach.call(document.querySelectorAll('.perbtn'),function(b){var on=+b.getAttribute('data-d')===d;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
  render('tr',SORT.tr);render('us',SORT.us);
- var rp=document.getElementById('rankper');if(rp)rp.textContent=PLBL[d];
+ Array.prototype.forEach.call(document.querySelectorAll('.perlabel'),function(el){el.textContent=PLBL[d]});
+ paintMoney();updateTotal();
  var rk=document.querySelector('.rank');if(rk&&rk.classList.contains('go'))paintRank();}
 function animRank(){var r=document.querySelector('.rank');if(!r||r.classList.contains('go'))return;
  requestAnimationFrame(function(){requestAnimationFrame(function(){r.classList.add('go')})});
@@ -545,13 +561,13 @@ document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){
  document.querySelectorAll('section').forEach(function(x){x.classList.remove('on')});
  t.classList.add('on');t.setAttribute('aria-selected','true');
  document.getElementById(t.dataset.s).classList.add('on');
- document.getElementById('periodrow').style.display=(['s-rank','s-tr','s-us'].indexOf(t.dataset.s)>=0)?'flex':'none';
+ document.getElementById('periodrow').style.display=(t.dataset.s==='s-an')?'none':'flex';
  window.scrollTo({top:0,behavior:RED?'auto':'smooth'});
  if(t.dataset.s==='s-rank')animRank();}});
 document.querySelectorAll('.sortbtn').forEach(function(b){b.onclick=function(){
  document.querySelectorAll('.sortbtn[data-g="'+b.dataset.g+'"]').forEach(function(x){x.classList.remove('on')});
  b.classList.add('on');SORT[b.dataset.g]=b.dataset.k;render(b.dataset.g,b.dataset.k);}});
-render('tr','total');render('us','total');animRank();
+render('tr','total');render('us','total');paintMoney();updateTotal();animRank();
 </script>
 </body>
 </html>
