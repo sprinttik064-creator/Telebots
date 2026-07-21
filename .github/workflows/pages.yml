@@ -1,0 +1,36 @@
+name: pages
+on:
+  push:
+    branches: [claude/turkey-usa-market-comparison-1dw50h]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Собрать статику для Pages
+        run: |
+          # корневой index.html = платформа; выкидываем тяжёлые папки-кандидаты
+          cp avtodom-platforma-local.html index.html
+          rm -rf photos/src-ct photos/src-rct photos/src-crt photos/src-kk
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - id: deployment
+        uses: actions/deploy-pages@v4
